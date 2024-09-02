@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"flag"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -46,6 +47,27 @@ func readFromFile() []byte {
 	return data
 }
 
-func main() {
+func print() {
+	n := parseFlags()
 
+	data := readFromFile()
+
+	lines := 0
+	for _, c := range data {
+		if c == 10 {
+			lines++
+		}
+		if lines < n {
+			fmt.Print(string(c))
+		} else {
+			fmt.Println()
+			break
+		}
+
+	}
+
+}
+
+func main() {
+	print()
 }
