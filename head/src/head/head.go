@@ -36,6 +36,16 @@ func getArg() (string, error) {
 
 }
 
+func readFromFile() []byte {
+	file, err := getArg()
+	check(err)
+
+	data, err := os.ReadFile(file)
+	check(err)
+
+	return data
+}
+
 func main() {
 
 }
