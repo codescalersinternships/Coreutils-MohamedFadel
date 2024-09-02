@@ -2,8 +2,8 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"os"
+	"strings"
 )
 
 func check(e error) {
@@ -16,14 +16,18 @@ func getArg() (string, error) {
 	if len(os.Args) == 1 {
 		return "", errors.New("you have to specify an argument")
 	}
-	arg := os.Args[1]
-	return arg, nil
+
+	var argument string
+	for i := 1; i < len(os.Args); i++ {
+		if !strings.HasPrefix(os.Args[i], "-") {
+			argument = os.Args[i]
+			break
+		}
+	}
+	return argument, nil
 
 }
 
 func main() {
-	arg, error := getArg()
-	check(error)
-	fmt.Println(arg)
 
 }
