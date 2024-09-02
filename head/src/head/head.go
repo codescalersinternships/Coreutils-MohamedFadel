@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"flag"
 	"os"
 	"strings"
 )
@@ -10,6 +11,13 @@ func check(e error) {
 	if e != nil {
 		panic(e)
 	}
+}
+
+func parseFlags() int {
+	nptr := flag.Int("n", 10, "number of lines")
+	flag.Parse()
+	n := *nptr
+	return n
 }
 
 func getArg() (string, error) {
