@@ -2,8 +2,15 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 )
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
 
 func getArg() (string, error) {
 	if len(os.Args) == 1 {
@@ -16,4 +23,7 @@ func getArg() (string, error) {
 
 func main() {
 	arg, error := getArg()
+	check(error)
+	fmt.Println(arg)
+
 }
