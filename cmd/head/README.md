@@ -55,7 +55,7 @@ This program reads a specified number of lines from a given text file and displa
 ```bash
 2024/09/03 17:50:04 cannot open this file for reading: No such file or directory
 ```
- * If unvalid flag value is specified like `-n=xyz` or `-n=-7`, an error message will be displayed indicating that it is unvalid value.
+ * If invalid flag value is specified like `-n=xyz` or `-n=-7`, an error message will be displayed indicating that it is invalid value.
  ```bash
  invalid value "xyz" for flag -n: parse error
 Usage of ./head:
