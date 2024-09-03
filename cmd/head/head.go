@@ -1,16 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"os"
 )
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
 
 func parseFlags() int {
 	var n int
@@ -19,43 +14,32 @@ func parseFlags() int {
 	return n
 }
 
-func getArg() (string, error) {
+func getArg() string {
 	arg := flag.Arg(0)
-	fmt.Println(arg)
-	return arg, nil
+	return arg
 }
 
-func readFromFile() []byte {
-	file, err := getArg()
-	check(err)
-
-	data, err := os.ReadFile(file)
-	check(err)
-
-	return data
-}
-
-func print() {
-	n := parseFlags()
-
-	data := readFromFile()
-
-	lines := 0
-	for _, c := range data {
-		if c == 10 {
-			lines++
-		}
-		if lines < n {
-			fmt.Print(string(c))
-		} else {
-			fmt.Println()
-			break
-		}
-
+func printFileLines(fileName string, nLines int) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		fmt.Println(err)
 	}
 
+	scanner := bufio.NewScanner(file)
+
+	lineCounter := 0
+	for scanner.Scan() && lineCounter < nLines {
+		line := scanner.Text()
+		lineCounter++
+		fmt.Println(line)
+	}
 }
 
 func main() {
-	print()
+	nLines := parseFlags()
+
+	file := getArg()
+
+	printFileLines(file, nLines)
+
 }
