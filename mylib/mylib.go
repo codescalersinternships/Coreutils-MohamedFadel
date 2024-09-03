@@ -3,6 +3,7 @@ package mylib
 import (
 	"flag"
 	"fmt"
+	"log"
 )
 
 func ParseFlagAndArgument() (uint, string, error) {
@@ -17,4 +18,10 @@ func ParseFlagAndArgument() (uint, string, error) {
 	}
 
 	return numOfLines, filePath, nil
+}
+
+func HandleError(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
