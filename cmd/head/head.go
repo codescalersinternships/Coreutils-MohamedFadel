@@ -7,20 +7,20 @@ import (
 	"os"
 )
 
-func parseFlags() int {
+func parseLineFlag() int {
 	var n int
 	flag.IntVar(&n, "n", 10, "number of lines")
 	flag.Parse()
 	return n
 }
 
-func getArg() string {
+func getFilePathArg() string {
 	arg := flag.Arg(0)
 	return arg
 }
 
-func printFileLines(fileName string, nLines int) {
-	file, err := os.Open(fileName)
+func printFileLines(filePath string, numOfLines int) {
+	file, err := os.Open(filePath)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -28,7 +28,7 @@ func printFileLines(fileName string, nLines int) {
 	scanner := bufio.NewScanner(file)
 
 	lineCounter := 0
-	for scanner.Scan() && lineCounter < nLines {
+	for scanner.Scan() && lineCounter < numOfLines {
 		line := scanner.Text()
 		lineCounter++
 		fmt.Println(line)
@@ -36,10 +36,10 @@ func printFileLines(fileName string, nLines int) {
 }
 
 func main() {
-	nLines := parseFlags()
+	numOfLines := parseLineFlag()
 
-	file := getArg()
+	filePath := getFilePathArg()
 
-	printFileLines(file, nLines)
+	printFileLines(filePath, numOfLines)
 
 }
