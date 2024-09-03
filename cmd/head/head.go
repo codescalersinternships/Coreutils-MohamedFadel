@@ -15,9 +15,9 @@ func check(e error) {
 }
 
 func parseFlags() int {
-	nptr := flag.Int("n", 10, "number of lines")
+	var n int
+	flag.IntVar(&n, "n", 10, "number of lines")
 	flag.Parse()
-	n := *nptr
 	return n
 }
 
