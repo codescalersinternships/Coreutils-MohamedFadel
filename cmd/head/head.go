@@ -7,16 +7,14 @@ import (
 	"os"
 )
 
-func parseLineFlag() int {
-	var n int
-	flag.IntVar(&n, "n", 10, "number of lines")
+func parseFlagAndArgument() (int, string) {
+	var numOfLines int
+	flag.IntVar(&numOfLines, "n", 10, "number of lines")
 	flag.Parse()
-	return n
-}
 
-func getFilePathArg() string {
-	arg := flag.Arg(0)
-	return arg
+	filePath := flag.Arg(0)
+
+	return numOfLines, filePath
 }
 
 func printFileLines(filePath string, numOfLines int) {
@@ -36,10 +34,7 @@ func printFileLines(filePath string, numOfLines int) {
 }
 
 func main() {
-	numOfLines := parseLineFlag()
-
-	filePath := getFilePathArg()
-
+	numOfLines, filePath := parseFlagAndArgument()
 	printFileLines(filePath, numOfLines)
 
 }
