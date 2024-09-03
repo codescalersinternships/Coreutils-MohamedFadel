@@ -2,31 +2,18 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
-	"log"
 	"os"
+
+	"github.com/codescalersinternships/Coreutils-MohamedFadel/mylib"
 )
-
-func parseFlagAndArgument() (uint, string, error) {
-	var numOfLines uint
-	flag.UintVar(&numOfLines, "n", 10, "number of lines")
-	flag.Parse()
-
-	filePath := flag.Arg(0)
-
-	if filePath == "" {
-		return 0, "", fmt.Errorf("invalid file path, you have to specify a valid path to text file")
-	}
-
-	return numOfLines, filePath, nil
-}
 
 func printFileLines(filePath string, numOfLines uint) error {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return fmt.Errorf("cannot open this file for reading: No such file or directory")
 	}
+	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 
@@ -39,15 +26,9 @@ func printFileLines(filePath string, numOfLines uint) error {
 	return nil
 }
 
-func handleError(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 func main() {
-	numOfLines, filePath, err := parseFlagAndArgument()
-	handleError(err)
+	numOfLines, filePath, err := mylib.ParseFlagAndArgument()
+	mylib.HandleError(err)
 	err = printFileLines(filePath, numOfLines)
-	handleError(err)
+	mylib.HandleError(err)
 }
