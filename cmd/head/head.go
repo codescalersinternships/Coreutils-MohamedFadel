@@ -27,7 +27,7 @@ func printFileLines(filePath string, numOfLines uint) error {
 }
 
 func main() {
-	numOfLines, filePath, err := utils.ParseFlagAndArgument()
+	numOfLines, filePath, _, _, _, err := utils.ParseFlagAndArgument()
 	utils.HandleError(err)
 	err = printFileLines(filePath, numOfLines)
 	utils.HandleError(err)
