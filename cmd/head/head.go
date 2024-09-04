@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/codescalersinternships/Coreutils-MohamedFadel/mylib"
+	utils "github.com/codescalersinternships/Coreutils-MohamedFadel/internal"
 )
 
 func printFileLines(filePath string, numOfLines uint) error {
@@ -27,8 +27,8 @@ func printFileLines(filePath string, numOfLines uint) error {
 }
 
 func main() {
-	numOfLines, filePath, err := mylib.ParseFlagAndArgument()
-	mylib.HandleError(err)
+	numOfLines, filePath, err := utils.ParseFlagAndArgument()
+	utils.HandleError(err)
 	err = printFileLines(filePath, numOfLines)
-	mylib.HandleError(err)
+	utils.HandleError(err)
 }
