@@ -101,7 +101,7 @@ func count(filePath string, lFlag, wFlag, cFlag bool) error {
 	return nil
 }
 
-//another approach
+// another approach
 func countUsingASCI(filePath string, lFlag, wFlag, cFlag bool) error {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
