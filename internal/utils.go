@@ -3,7 +3,6 @@ package utils
 import (
 	"flag"
 	"fmt"
-	"log"
 )
 
 func ParseFlagsAndArgument() (uint, string, bool, bool, bool, error) {
@@ -24,10 +23,4 @@ func ParseFlagsAndArgument() (uint, string, bool, bool, bool, error) {
 	}
 
 	return numOfLines, filePath, lFlag, wFlag, cFlag, nil
-}
-
-func HandleError(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
 }

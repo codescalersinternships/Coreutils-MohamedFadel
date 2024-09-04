@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 
 	utils "github.com/codescalersinternships/Coreutils-MohamedFadel/internal"
@@ -123,9 +124,16 @@ func countUsingASCI(filePath string, lFlag, wFlag, cFlag bool) error {
 
 func main() {
 	_, filePath, lFlag, wFlag, cFlag, err := utils.ParseFlagsAndArgument()
-	utils.HandleError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	err = count(filePath, lFlag, wFlag, cFlag)
-	utils.HandleError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 	err = countUsingASCI(filePath, lFlag, wFlag, cFlag)
-	utils.HandleError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

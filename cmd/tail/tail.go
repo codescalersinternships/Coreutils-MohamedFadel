@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 
 	utils "github.com/codescalersinternships/Coreutils-MohamedFadel/internal"
@@ -38,7 +39,12 @@ func printFileLines(filePath string, numOfLines uint) error {
 
 func main() {
 	numOfLines, filePath, _, _, _, err := utils.ParseFlagsAndArgument()
-	utils.HandleError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	err = printFileLines(filePath, numOfLines)
-	utils.HandleError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
