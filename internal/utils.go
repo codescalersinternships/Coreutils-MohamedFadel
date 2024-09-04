@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func ParseFlagAndArgument() (uint, string, bool, bool, bool, error) {
+func ParseFlagsAndArgument() (uint, string, bool, bool, bool, error) {
 	var numOfLines uint
 	var lFlag, wFlag, cFlag bool
 
@@ -14,6 +14,7 @@ func ParseFlagAndArgument() (uint, string, bool, bool, bool, error) {
 	flag.BoolVar(&lFlag, "l", false, "count lines flag")
 	flag.BoolVar(&wFlag, "w", false, "count words flag")
 	flag.BoolVar(&cFlag, "c", false, "count characters flag")
+
 	flag.Parse()
 
 	filePath := flag.Arg(0)
