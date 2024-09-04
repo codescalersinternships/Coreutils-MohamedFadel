@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 )
 
 func parseFlagsAndArguments() (bool, []string) {
@@ -16,7 +17,20 @@ func parseFlagsAndArguments() (bool, []string) {
 	return trailingLineFlag, strings
 }
 
+func echo(trailingLineFlag bool, strings []string) {
+	if trailingLineFlag {
+		for _, string := range strings {
+			fmt.Print(string, " ")
+		}
+	} else {
+		for _, string := range strings {
+			fmt.Print(string, " ")
+		}
+		fmt.Println()
+	}
+}
+
 func main() {
 	trailingLineFlag, strings := parseFlagsAndArguments()
-
+	echo(trailingLineFlag, strings)
 }
