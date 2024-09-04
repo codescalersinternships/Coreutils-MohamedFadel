@@ -16,6 +16,17 @@ func countLines(scanner *bufio.Scanner) {
 
 }
 
+func countWords(scanner *bufio.Scanner) {
+	var counter uint = 0
+
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		counter++
+	}
+	fmt.Println("Number of words:", counter)
+
+}
+
 func main() {
 
 }
