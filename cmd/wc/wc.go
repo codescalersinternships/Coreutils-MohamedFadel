@@ -2,12 +2,29 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"os"
-
-	utils "github.com/codescalersinternships/Coreutils-MohamedFadel/internal"
 )
+
+func parseFlagsAndArgument() (string, bool, bool, bool, error) {
+	var lFlag, wFlag, cFlag bool
+
+	flag.BoolVar(&lFlag, "l", false, "count lines flag")
+	flag.BoolVar(&wFlag, "w", false, "count words flag")
+	flag.BoolVar(&cFlag, "c", false, "count characters flag")
+
+	flag.Parse()
+
+	filePath := flag.Arg(0)
+
+	if filePath == "" {
+		return "", false, false, false, fmt.Errorf("invalid file path, you have to specify a valid path to text file")
+	}
+
+	return filePath, lFlag, wFlag, cFlag, nil
+}
 
 func countLines(scanner *bufio.Scanner) {
 	var counter uint = 0
@@ -84,6 +101,7 @@ func count(filePath string, lFlag, wFlag, cFlag bool) error {
 	return nil
 }
 
+//another approach
 func countUsingASCI(filePath string, lFlag, wFlag, cFlag bool) error {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
@@ -123,7 +141,7 @@ func countUsingASCI(filePath string, lFlag, wFlag, cFlag bool) error {
 }
 
 func main() {
-	_, filePath, lFlag, wFlag, cFlag, err := utils.ParseFlagsAndArgument()
+	filePath, lFlag, wFlag, cFlag, err := parseFlagsAndArgument()
 	if err != nil {
 		log.Fatal(err)
 	}
