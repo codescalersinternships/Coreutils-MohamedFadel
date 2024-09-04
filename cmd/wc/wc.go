@@ -83,10 +83,49 @@ func count(filePath string, lFlag, wFlag, cFlag bool) error {
 	return nil
 }
 
+func countUsingASCI(filePath string, lFlag, wFlag, cFlag bool) error {
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return fmt.Errorf("cannot open this file for reading: No such file or directory")
+	}
+
+	var lineCounter, wordCounter int = 0, 0
+	var characterCounter int = len(data)
+
+	for _, ch := range data {
+		if ch == 10 {
+			lineCounter++
+		}
+		if ch == 32 || ch == 10 {
+			wordCounter++
+		}
+	}
+
+	if lFlag {
+		fmt.Println("Number of lines:", lineCounter)
+	}
+	if wFlag {
+		fmt.Println("Number of words:", wordCounter)
+	}
+	if cFlag {
+		fmt.Println("Number of characters:", characterCounter)
+	}
+
+	if !lFlag && !wFlag && !cFlag {
+		fmt.Println("Number of lines:", lineCounter)
+		fmt.Println("Number of words:", wordCounter)
+		fmt.Println("Number of characters:", characterCounter)
+
+	}
+
+	return nil
+}
+
 func main() {
 	_, filePath, lFlag, wFlag, cFlag, err := utils.ParseFlagsAndArgument()
 	utils.HandleError(err)
 	err = count(filePath, lFlag, wFlag, cFlag)
 	utils.HandleError(err)
-
+	err = countUsingASCI(filePath, lFlag, wFlag, cFlag)
+	utils.HandleError(err)
 }
