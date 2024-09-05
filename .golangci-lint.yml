@@ -10,4 +10,12 @@ linters:
     - unused
 
 run:
-  timeout: 5m  # Set a timeout for the linter run
+  timeout: 5m
+  skip-dirs:
+    - vendor
+  include:
+    - cmd/
+    - internal/
+  exclude:
+    - ^cmd/.*\.md 
+    - ^internal/README.md
