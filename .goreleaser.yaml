@@ -1,4 +1,6 @@
 # .goreleaser.yaml
+version: 2
+
 builds:
   - id: "cat"
     main: ./cmd/cat
