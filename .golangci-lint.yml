@@ -1,0 +1,13 @@
+linters:
+  enable:
+    - govet
+    - gofmt
+    - ineffassign
+    - errcheck
+    - staticcheck
+    - gosec
+    - goimports
+    - unused
+
+run:
+  timeout: 5m  # Set a timeout for the linter run

@@ -1,0 +1,122 @@
+# .goreleaser.yml
+project_name: my-go-project
+
+builds:
+  - id: 'cat'
+    main: ./cmd/cat/cat.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'echo'
+    main: ./cmd/echo/echo.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'env'
+    main: ./cmd/env/env.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'false'
+    main: ./cmd/false/false.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'head'
+    main: ./cmd/head/head.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'tail'
+    main: ./cmd/tail/tail.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'tree'
+    main: ./cmd/tree/tree.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'true'
+    main: ./cmd/true/true.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'wc'
+    main: ./cmd/wc/wc.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+  - id: 'yes'
+    main: ./cmd/yes/yes.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      
+release:
+  github:
+    owner: MohamedFadel01
+    name: Coreutils-MohamedFadel
