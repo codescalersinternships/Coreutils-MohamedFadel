@@ -67,33 +67,51 @@ func count(filePath string, lFlag, wFlag, cFlag bool) error {
 	defer file.Close()
 
 	if lFlag {
-		file.Seek(0, 0)
+		_, err := file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		scanner := bufio.NewScanner(file)
 		countLines(scanner)
 	}
 
 	if wFlag {
-		file.Seek(0, 0)
+		_, err := file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		scanner := bufio.NewScanner(file)
 		countWords(scanner)
 	}
 
 	if cFlag {
-		file.Seek(0, 0)
+		_, err := file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		scanner := bufio.NewScanner(file)
 		countCharacters(scanner)
 	}
 
 	if !lFlag && !wFlag && !cFlag {
 		scanner := bufio.NewScanner(file)
-		file.Seek(0, 0)
+		_, err := file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		countLines(scanner)
 
-		file.Seek(0, 0)
+		_, err = file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		scanner = bufio.NewScanner(file)
 		countWords(scanner)
 
-		file.Seek(0, 0)
+		_, err = file.Seek(0, 0)
+		if err != nil {
+			log.Fatal(err)
+		}
 		scanner = bufio.NewScanner(file)
 		countCharacters(scanner)
 	}

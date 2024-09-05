@@ -54,7 +54,10 @@ func tree(path string, depthLevelFlag, numOfTabs uint, dirCount, fileCount *uint
 			numOfTabs++
 			depthLevelFlag--
 
-			tree(newPath, depthLevelFlag, numOfTabs, dirCount, fileCount)
+			err := tree(newPath, depthLevelFlag, numOfTabs, dirCount, fileCount)
+			if err != nil {
+				log.Fatal(err)
+			}
 
 			numOfTabs--
 			depthLevelFlag++
