@@ -1,24 +1,31 @@
 # .github/workflows/release.yml
-name: goreleaser
-
 on:
   push:
-    branches:
-      - main
-      - development
-  pull_request:
-    branches:
-      - main
-      - development
+    tags:
+      - v*
 
-jobs:
 
-  build:
+jobs:        
+  goreleaser:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: "true"
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.23.0'
+          go-version: 1.21
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6.0.0
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.CoreutilsMohamedFadelSecret }}
+
