@@ -18,4 +18,5 @@ run:
     - internal/
   exclude:
     - ^cmd/.*\.md 
-    - ^internal/README.md
+    - ^internal/.*\.md
+    - ^/usr/local/go/src/  # Exclude Go standard library directory
