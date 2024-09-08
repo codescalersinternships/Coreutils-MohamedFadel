@@ -2,31 +2,18 @@ package main
 
 import (
 	"flag"
-	"fmt"
+
+	"github.com/codescalersinternships/Coreutils-MohamedFadel/internal/yes"
 )
 
 func parseArguments() []string {
 	flag.Parse()
-
-	strings := flag.Args()
-
-	return strings
+	return flag.Args()
 }
 
 func main() {
-	strings := parseArguments()
+	words := parseArguments()
 
-	if len(strings) != 0 {
-		for {
-			for _, string := range strings {
-				fmt.Print(string, " ")
-			}
-			fmt.Println()
-		}
-	}
-
-	for {
-		fmt.Println("y")
-	}
+	yes.Yes(words)
 
 }

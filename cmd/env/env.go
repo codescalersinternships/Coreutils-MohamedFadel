@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"github.com/codescalersinternships/Coreutils-MohamedFadel/internal/env"
 )
 
 func main() {
-	for _, ev := range os.Environ() {
-		fmt.Println(ev)
-	}
+	env.Env()
 }

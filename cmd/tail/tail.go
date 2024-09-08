@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"log"
-	"os"
+
+	"github.com/codescalersinternships/Coreutils-MohamedFadel/internal/tail"
 )
 
 func parseFlagsAndArguments() (uint, string, error) {
@@ -24,42 +24,14 @@ func parseFlagsAndArguments() (uint, string, error) {
 	return numOfLines, filePath, nil
 }
 
-func printFileLines(filePath string, numOfLines uint) error {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return fmt.Errorf("cannot open this file for reading: No such file or directory")
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-
-	lines := make([]string, 0, numOfLines)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if uint(len(lines)) == numOfLines {
-			lines = lines[1:]
-		}
-
-		lines = append(lines, line)
-	}
-
-	for _, line := range lines {
-		fmt.Println(line)
-	}
-
-	return nil
-}
-
 func main() {
 	numOfLines, filePath, err := parseFlagsAndArguments()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = printFileLines(filePath, numOfLines)
-	if err != nil {
+	if err = tail.Tail(filePath, numOfLines); err != nil {
 		log.Fatal(err)
 	}
+
 }

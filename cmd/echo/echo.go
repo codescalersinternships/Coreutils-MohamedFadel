@@ -2,7 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
+
+	"github.com/codescalersinternships/Coreutils-MohamedFadel/internal/echo"
 )
 
 func parseFlagsAndArguments() (bool, []string) {
@@ -12,25 +13,12 @@ func parseFlagsAndArguments() (bool, []string) {
 
 	flag.Parse()
 
-	strings := flag.Args()
+	words := flag.Args()
 
-	return trailingLineFlag, strings
-}
-
-func echo(trailingLineFlag bool, strings []string) {
-	if trailingLineFlag {
-		for _, string := range strings {
-			fmt.Print(string, " ")
-		}
-	} else {
-		for _, string := range strings {
-			fmt.Print(string, " ")
-		}
-		fmt.Println()
-	}
+	return trailingLineFlag, words
 }
 
 func main() {
-	trailingLineFlag, strings := parseFlagsAndArguments()
-	echo(trailingLineFlag, strings)
+	trailingLineFlag, words := parseFlagsAndArguments()
+	echo.Echo(trailingLineFlag, words)
 }
