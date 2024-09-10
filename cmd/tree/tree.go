@@ -11,9 +11,7 @@ import (
 
 func parseFlagsAndArguments() (uint, string, error) {
 	var depthLevelFlag uint
-
 	flag.UintVar(&depthLevelFlag, "L", 1, "Max display depth of the directory tree")
-
 	flag.Parse()
 
 	path := flag.Arg(0)
@@ -34,15 +32,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(path)
-
-	var fileCount, dirCount uint = 0, 0
-
-	if err := tree.Tree(path, depthLevelFlag, 0, &dirCount, &fileCount); err != nil {
+	_, _, err = tree.Tree(path, path, depthLevelFlag, 0)
+	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println()
-	fmt.Println(dirCount, "directories,", fileCount, "files")
-
 }

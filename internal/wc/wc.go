@@ -9,29 +9,29 @@ import (
 func Count(filePath string, lFlag, wFlag, cFlag bool) error {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
-		return fmt.Errorf("cannot open this file for reading: No such file or directory")
+		return fmt.Errorf("%s: cannot open this file for reading: %w", filePath, err)
 	}
 
-	var characterCounter int = len(data)
-	var lineCounter = len(strings.Split(string(data), "\n")) - 1
-	var wordCounter = len(strings.Split(string(data), " ")) + lineCounter - 1
-
-	if lFlag {
-		fmt.Println("Number of lines:", lineCounter)
-	}
-	if wFlag {
-		fmt.Println("Number of words:", wordCounter)
-	}
-	if cFlag {
-		fmt.Println("Number of characters:", characterCounter)
-	}
+	characterCounter := len(data)
+	lineCounter := len(strings.Split(string(data), "\n")) - 1
+	wordCounter := len(strings.Fields(string(data)))
 
 	if !lFlag && !wFlag && !cFlag {
-		fmt.Println("Number of lines:", lineCounter)
-		fmt.Println("Number of words:", wordCounter)
-		fmt.Println("Number of characters:", characterCounter)
-
+		lFlag = true
+		wFlag = true
+		cFlag = true
 	}
+
+	if lFlag {
+		fmt.Print(lineCounter, " ")
+	}
+	if wFlag {
+		fmt.Print(wordCounter, " ")
+	}
+	if cFlag {
+		fmt.Print(characterCounter, " ")
+	}
+	fmt.Println(filePath)
 
 	return nil
 }

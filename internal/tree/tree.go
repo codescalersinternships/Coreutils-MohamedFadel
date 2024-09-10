@@ -2,7 +2,6 @@ package tree
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
@@ -13,10 +12,16 @@ func tab(tabs uint) {
 	}
 }
 
-func Tree(path string, depthLevelFlag, numOfTabs uint, dirCount, fileCount *uint) error {
-	contents, err := os.ReadDir(path)
+func Tree(startPath, currentPath string, depthLevelFlag, numOfTabs uint) (uint, uint, error) {
+	var fileCount, dirCount uint = 0, 0
+
+	if startPath == currentPath {
+		fmt.Println(startPath)
+	}
+
+	contents, err := os.ReadDir(currentPath)
 	if err != nil {
-		return fmt.Errorf("%s: [error opening dir]", path)
+		return 0, 0, fmt.Errorf("%s: %w", currentPath, err)
 	}
 
 	for _, content := range contents {
@@ -24,25 +29,31 @@ func Tree(path string, depthLevelFlag, numOfTabs uint, dirCount, fileCount *uint
 			continue
 		}
 
-		if content.IsDir() {
-			*dirCount++
-		} else {
-			*fileCount++
-		}
-
 		tab(numOfTabs)
 		fmt.Println("│──", content.Name())
 
-		if content.IsDir() && depthLevelFlag > 1 {
-			newPath := path + "/" + content.Name()
+		if content.IsDir() {
+			dirCount++
 
-			if err := Tree(newPath, depthLevelFlag-1, numOfTabs+1, dirCount, fileCount); err != nil {
-				log.Fatal(err)
+			if depthLevelFlag > 1 {
+				newPath := currentPath + "/" + content.Name()
+				subDirCount, subFileCount, err := Tree(startPath, newPath, depthLevelFlag-1, numOfTabs+1)
+
+				if err != nil {
+					return 0, 0, err
+				}
+
+				dirCount += subDirCount
+				fileCount += subFileCount
 			}
-
+		} else {
+			fileCount++
 		}
-
 	}
 
-	return nil
+	if currentPath == startPath {
+		fmt.Printf("\n%d directories, %d files\n", dirCount, fileCount)
+	}
+
+	return dirCount, fileCount, nil
 }
