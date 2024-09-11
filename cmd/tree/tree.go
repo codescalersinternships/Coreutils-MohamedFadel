@@ -2,11 +2,11 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/codescalersinternships/Coreutils-MohamedFadel/internal/tree"
+	"github.com/pkg/errors"
 )
 
 func parseFlagsAndArguments() (uint, string, error) {
@@ -18,7 +18,7 @@ func parseFlagsAndArguments() (uint, string, error) {
 	if path == "" {
 		currentDir, err := os.Getwd()
 		if err != nil {
-			return 1, "", fmt.Errorf("invalid path, you have to specify a valid path to a directory")
+			return 1, "", errors.Wrap(err, "invalid path, you have to specify a valid path to a directory")
 		}
 		path = currentDir
 	}

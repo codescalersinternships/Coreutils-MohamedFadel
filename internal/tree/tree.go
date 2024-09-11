@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 func tab(tabs uint) {
@@ -21,7 +23,7 @@ func Tree(startPath, currentPath string, depthLevelFlag, numOfTabs uint) (uint, 
 
 	contents, err := os.ReadDir(currentPath)
 	if err != nil {
-		return 0, 0, fmt.Errorf("%s: %w", currentPath, err)
+		return 0, 0, errors.Wrapf(err, "%s:", currentPath)
 	}
 
 	for _, content := range contents {

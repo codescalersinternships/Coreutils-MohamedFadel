@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 func Count(filePath string, lFlag, wFlag, cFlag bool) error {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
-		return fmt.Errorf("%s: cannot open this file for reading: %w", filePath, err)
+		return errors.Wrapf(err, "cannot open this file for reading: %s", filePath)
 	}
 
 	characterCounter := len(data)
