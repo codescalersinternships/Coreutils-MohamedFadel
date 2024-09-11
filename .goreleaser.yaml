@@ -1,0 +1,183 @@
+# .goreleaser.yaml
+version: 2
+
+builds:
+  - id: "cat"
+    main: ./cmd/cat
+    binary: "cat"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building cat..."
+      post:
+        - echo "Cat build complete!"
+
+  - id: "echo"
+    main: ./cmd/echo
+    binary: "echo"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building echo..."
+      post:
+        - echo "Echo build complete!"
+
+  - id: "env"
+    main: ./cmd/env
+    binary: "env"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building env..."
+      post:
+        - echo "Env build complete!"
+
+  - id: "false"
+    main: ./cmd/false
+    binary: "false"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building false..."
+      post:
+        - echo "False build complete!"
+
+  - id: "head"
+    main: ./cmd/head
+    binary: "head"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building head..."
+      post:
+        - echo "Head build complete!"
+
+  - id: "tail"
+    main: ./cmd/tail
+    binary: "tail"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building tail..."
+      post:
+        - echo "Tail build complete!"
+
+  - id: "tree"
+    main: ./cmd/tree
+    binary: "tree"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building tree..."
+      post:
+        - echo "Tree build complete!"
+
+  - id: "true"
+    main: ./cmd/true
+    binary: "true"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building true..."
+      post:
+        - echo "True build complete!"
+
+  - id: "wc"
+    main: ./cmd/wc
+    binary: "wc"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building wc..."
+      post:
+        - echo "Wc build complete!"
+
+  - id: "yes"
+    main: ./cmd/yes
+    binary: "yes"
+    ldflags:
+      - -s -w
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre:
+        - echo "Building yes..."
+      post:
+        - echo "Yes build complete!"
